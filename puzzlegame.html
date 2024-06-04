@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Children's Rights Puzzle</title>
+  <style>
+  img{
+      background-repeat: no-repeat;
+      background-size: cover;
+    }    
+  body {
+  background-color: #f0f0f0;
+  font-family: Arial, sans-serif;
+  background-size: cover;
+}
+
+.puzzle-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+#puzzle-board {
+  width: 400px;
+  height: 300px;
+  margin: 20px auto;
+  background-color: #eee;
+  border: 2px solid #333;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 10px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+ </style>
+</head>
+<body>
+  <div class="puzzle-container">
+    <h1>Children's Rights Puzzle</h1>
+    <div id="puzzle-board"></div>
+    <button onclick="shufflePieces()">Shuffle</button>
+    <button onclick="solvePuzzle()">Solve</button>
+  </div>
+
+  <script>
+    // Define puzzle pieces
+var pieces = [
+  "piece1.jpg",
+  "piece2.jpg",
+  "piece3.jpg",
+  "piece4.jpg",
+  "piece5.jpg",
+  "piece6.jpg",
+  "piece7.jpg",
+  "piece8.jpg",
+  "piece9.jpg"
+];
+
+// Shuffle puzzle pieces
+function shufflePieces() {
+  pieces.sort(() => Math.random() - 0.5);
+  renderPuzzle();
+}
+
+// Solve the puzzle
+function solvePuzzle() {
+  pieces.sort((a, b) => a.localeCompare(b));
+  renderPuzzle();
+}
+
+// Render puzzle board
+function renderPuzzle() {
+  var puzzleBoard = document.getElementById("puzzle-board");
+  puzzleBoard.innerHTML = "";
+  pieces.forEach(piece => {
+    var img = document.createElement("img");
+    img.src = "images/" + piece;
+    img.classList.add("puzzle-piece");
+    puzzleBoard.appendChild(img);
+  });
+}
+
+// Initial render
+renderPuzzle();
+
+  </script>
+</body>
+</html>
+

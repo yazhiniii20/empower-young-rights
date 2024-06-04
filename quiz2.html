@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport"content="width=device-width,initial-scale=1.0" />
+	<title>Code Quiz</title>
+    <style>
+* {
+	font-family: Georgia, Times, "Times New Roman", serif;
+}
+
+.quiz,
+.scores {
+	margin: 50px auto 0 auto;
+	max-width: 400px;
+}
+
+#top {
+	color: red;
+}
+
+.containerNew {
+	border: 5px solid;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	height: 580px;
+	width: 50%;
+	transform: translate(-50%, -50%);
+	padding: 10px;
+}
+
+p {
+	margin: 15px 15px;
+}
+
+.landing {
+	text-align: center;
+}
+
+.scoresHeader {
+	position: absolute;
+	top: 15px;
+	left: 15px;
+}
+
+.timer {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+}
+
+button {
+	display: inline-block;
+	margin: 10px;
+	cursor: pointer;
+	color: #fff;
+	background-color: #52865a;
+	border-radius: 5px;
+	border: 0;
+	padding: 20px;
+}
+
+button:hover {
+	background-color: #2a8d12;
+}
+
+.options button {
+	display: block;
+}
+
+input[type="text"] {
+	font-size: 100%;
+}
+
+.hide {
+	display: none;
+}
+
+.feedback {
+	font-style: bold;
+	font-size: 120%;
+	margin-top: 20px;
+	padding-top: 15px;
+	color: #fff;
+	border-top: 2px solid #4B0082;
+}
+
+ol {
+	padding-left: 15px;
+	max-height: 600px;
+	overflow: auto;
+}
+
+li {
+	padding: 5px;
+	list-style: decimal inside none;
+}
+
+li:nth-child(odd) {
+	background-color: #dfdae7;
+}
+
+@media screen and (max-width: 768px) {
+	.containerNew {
+		width: 80%;
+	}
+}
+
+@media screen and (max-width: 575px) {
+	.containerNew {
+		width: 90%;
+	}
+
+	.quiz,
+	.scores {
+		max-width: 90%;
+	}
+}
+
+    </style>
+</head>
+
+<body>
+	<div class="containerNew">
+		<header>
+			<div>
+				<a href="highScore1.html">
+					<button class="scores-header"
+							id="view-high-scores">
+						View High Scores
+					</button>
+				</a>
+			</div>
+
+			<div class="timer">
+				<p>
+					Time:
+					<span id="timer">
+						0
+					</span>
+				</p>
+			</div>
+		</header>
+
+		<main class="quiz">
+			<div id="quiz-start">
+				<div class="landing"
+					id="start-screen">
+					<h1 id="top">
+						EmpowerYoungRights
+					</h1>
+					<h1>
+					    Directive Principles of State Policy in India
+					</h1>
+					<p>
+						Try to answer the following
+						  questions with
+						in the time limit. Keep in
+						mind that incorrect answers
+						will penalize your score/time
+						by ten seconds!
+					</p>
+					<button id="start">
+						Start Quiz
+					</button>
+				</div>
+			</div>
+
+			<div class="hide" id="questions">
+				<h2 id="question-words"></h2>
+				<div class="options" id="options">
+				</div>
+			</div>
+
+			<div class="hide" id="quiz-end">
+				<h2>All Done!</h2>
+				<p>Your final score is:
+					<span id="score-final">
+					</span>
+				</p>
+				<p>
+					Please enter your name:
+					<input type="text"
+						id="name"
+						max="3" />
+					<button id="submit-score">
+						Submit
+					</button>
+				</p>
+			</div>
+
+			<div id="feedback"
+				class="feedback hide">
+			</div>
+		</main>
+	</div>
+	<script>
+        let questions = [
+	{
+		prompt: `What are the Directive Principles of State Policy meant to do?`,
+		options: [
+			"Guide the government in making laws",
+			"Give rights to citizens",
+			"Provide power to the President",
+			"Amend the Constitution",
+		],
+		answer: "Guide the government in making laws",
+	},
+
+	{
+		prompt: `Where are the Directive Principles of State Policy found in the Indian Constitution?`,
+		options: [
+			"Preamble","Part III","Part IV","Schedule VII",
+		],
+		answer: "Part IV",
+	},
+
+	{
+		prompt: `Are the Directive Principles of State Policy legally enforceable?`,
+		options: [
+			"Yes",
+			"No",
+			"Only during emergencies",
+			"Only by the Supreme Court",
+		],
+		answer: "No",
+	},
+
+	{
+		prompt: `The Directive Principles of State Policy are categorized into which of the following groups?`,
+		options: ["Social, Economic, and Cultural",
+         "Legal, Political, and Economic", "Social, Economic, and Political",
+          "Political, Cultural, and Legal"],
+		answer: "Social, Economic, and Political",
+	},
+
+	{
+		prompt: `What do the Directive Principles aim to achieve?`,
+		options: [
+			"A democratic government",
+			"A fair society",
+			"A powerful military",
+			"A strong president",
+		],
+		answer: "A fair society",
+    },
+    {
+        prompt: `Why are Directive Principles important for India?`,
+		options: [
+			"They give absolute power to the government",
+			"They help in creating laws for the common good",
+			"They are enforceable by the courts",
+			"They allow only certain people to vote",
+		],
+		answer: "They help in creating laws for the common good",
+    },{
+        prompt: `The Directive Principles were influenced by which country’s constitution?`,
+		options: [
+			"USA",
+			"UK",
+			"Ireland",
+			"France",
+		],
+		answer: "Ireland",
+    }, {
+        prompt: `Who is responsible for implementing the Directive Principles?`,
+		options: [
+			"Citizens",
+			"Judiciary",
+			"Government",
+			"International Organization",
+		],
+		answer: "Government",
+	},
+];
+
+// Get Dom Elements
+
+let questionsEl =
+	document.querySelector(
+		"#questions"
+	);
+let timerEl =
+	document.querySelector("#timer");
+let choicesEl =
+	document.querySelector("#options");
+let submitBtn = document.querySelector(
+	"#submit-score"
+);
+let startBtn =
+	document.querySelector("#start");
+let nameEl =
+	document.querySelector("#name");
+let feedbackEl = document.querySelector(
+	"#feedback"
+);
+let reStartBtn =
+	document.querySelector("#restart");
+
+// Quiz's initial state
+let currentQuestionIndex = 0;
+let time = questions.length * 15;
+let timerId;
+
+// Start quiz and hide frontpage
+
+function quizStart() {
+	timerId = setInterval(
+		clockTick,
+		1000
+	);
+	timerEl.textContent = time;
+	let landingScreenEl =
+		document.getElementById(
+			"start-screen"
+		);
+	landingScreenEl.setAttribute(
+		"class",
+		"hide"
+	);
+	questionsEl.removeAttribute(
+		"class"
+	);
+	getQuestion();
+}
+
+// Loop through array of questions and
+// Answers and create list with buttons
+function getQuestion() {
+	let currentQuestion =
+		questions[currentQuestionIndex];
+	let promptEl =
+		document.getElementById(
+			"question-words"
+		);
+	promptEl.textContent =
+		currentQuestion.prompt;
+	choicesEl.innerHTML = "";
+	currentQuestion.options.forEach(
+		function (choice, i) {
+			let choiceBtn =
+				document.createElement(
+					"button"
+				);
+			choiceBtn.setAttribute(
+				"value",
+				choice
+			);
+			choiceBtn.textContent =
+				i + 1 + ". " + choice;
+			choiceBtn.onclick =
+				questionClick;
+			choicesEl.appendChild(
+				choiceBtn
+			);
+		}
+	);
+}
+
+// Check for right answers and deduct
+// Time for wrong answer, go to next question
+
+function questionClick() {
+	if (
+		this.value !==
+		questions[currentQuestionIndex]
+			.answer
+	) {
+		time -= 10;
+		if (time < 0) {
+			time = 0;
+		}
+		timerEl.textContent = time;
+		feedbackEl.textContent = `Wrong! The correct answer was 
+		${questions[currentQuestionIndex].answer}.`;
+		feedbackEl.style.color = "red";
+	} else {
+		feedbackEl.textContent =
+			"Correct!";
+		feedbackEl.style.color =
+			"green";
+	}
+	feedbackEl.setAttribute(
+		"class",
+		"feedback"
+	);
+	setTimeout(function () {
+		feedbackEl.setAttribute(
+			"class",
+			"feedback hide"
+		);
+	}, 2000);
+	currentQuestionIndex++;
+	if (
+		currentQuestionIndex ===
+		questions.length
+	) {
+		quizEnd();
+	} else {
+		getQuestion();
+	}
+}
+
+// End quiz by hiding questions,
+// Stop timer and show final score
+
+function quizEnd() {
+	clearInterval(timerId);
+	let endScreenEl =
+		document.getElementById(
+			"quiz-end"
+		);
+	endScreenEl.removeAttribute(
+		"class"
+	);
+	let finalScoreEl =
+		document.getElementById(
+			"score-final"
+		);
+	finalScoreEl.textContent = time;
+	questionsEl.setAttribute(
+		"class",
+		"hide"
+	);
+}
+
+// End quiz if timer reaches 0
+
+function clockTick() {
+	time--;
+	timerEl.textContent = time;
+	if (time <= 0) {
+		quizEnd();
+	}
+}
+
+// Save score in local storage
+// Along with users' name
+
+function saveHighscore() {
+	let name = nameEl.value.trim();
+	if (name !== "") {
+		let highscores =
+			JSON.parse(
+				window.localStorage.getItem(
+					"highscores"
+				)
+			) || [];
+		let newScore = {
+			score: time,
+			name: name,
+		};
+		highscores.push(newScore);
+		window.localStorage.setItem(
+			"highscores",
+			JSON.stringify(highscores)
+		);
+		alert(
+			"Your Score has been Submitted"
+		);
+	}
+}
+
+// Save users' score after pressing enter
+
+function checkForEnter(event) {
+	if (event.key === "Enter") {
+		saveHighscore();
+		alert(
+			"Your Score has been Submitted"
+		);
+	}
+}
+nameEl.onkeyup = checkForEnter;
+
+// Save users' score after clicking submit
+
+submitBtn.onclick = saveHighscore;
+
+// Start quiz after clicking start quiz
+
+startBtn.onclick = quizStart;
+
+    </script>
+</body>
+
+</html>

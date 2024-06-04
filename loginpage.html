@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LoginPage</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="loginpagecss.css">
+</head>
+<body>
+  <div class="container right-panel-active">
+    <div class="container__form container--signup">
+      <form action="#" class="form" id="form1">
+        <h2 class="form__title">Sign Up</h2>
+        <input type="text" placeholder="Name" class="input" id="signupName" />
+        <input type="email" placeholder="Email" class="input" id="signupEmail" />
+        <input type="password" placeholder="Password" class="input" id="signupPassword" />
+        <button class="btn" id="signupBtn">Sign Up</button>
+      </form>
+    </div>
+
+    <div class="container__form container--signin">
+      <form action="#" class="form" id="form2">
+        <h2 class="form__title">Sign In</h2>
+        <input type="email" placeholder="Email" class="input" id="loginEmail" />
+        <input type="password" placeholder="Password" class="input" id="loginPassword" />
+        <a href="#" class="link">Forgot your password?</a>
+        <button class="btn" id="loginBtn">Sign In</button>
+      </form>
+    </div>
+    <div class="container__overlay">
+      <div class="overlay">
+        <div class="overlay__panel overlay--left">
+          <button class="btn" id="signIn">Sign In</button>
+        </div>
+        <div class="overlay__panel overlay--right">
+          <button class="btn" id="signUp">Sign Up</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="loginpagejs.js"></script>
+</body>
+</html>
+

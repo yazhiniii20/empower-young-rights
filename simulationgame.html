@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Children's Rights Simulation</title>
+  <style>
+    body {
+  background-color: #f0f0f0;
+  font-family: Arial, sans-serif;
+}
+
+.game-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  background-size: cover;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+#scenario {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+#options {
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 10px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#outcome {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #333;
+}
+
+  </style>
+</head>
+<body>
+  <div class="game-container">
+    <h1>Children's Rights Simulation</h1>
+    <div id="scenario"></div>
+    <div id="options"></div>
+    <div id="outcome"></div>
+    <button onclick="nextScenario()">Next Scenario</button>
+  </div>
+
+  <script>
+     // Define simulation scenarios
+var scenarios = [
+  {
+    scenario: "You are a 10-year-old girl living in a rural village with limited access to education. You have to walk 5 miles to the nearest school every day. Your family needs your help in the fields. What do you do?",
+    options: [
+      "Attend school despite the long journey.",
+      "Help your family in the fields instead."
+    ],
+    outcomes: [
+      "You attend school and receive an education, which improves your future opportunities.",
+      "You miss out on education and face limited opportunities in the future."
+    ]
+  },
+  {
+    scenario: "You are a 12-year-old boy working in a factory to support your family. Your work is exhausting, and you often work long hours in hazardous conditions. What do you do?",
+    options: [
+      "Continue working to support your family.",
+      "Seek help to end child labor and attend school."
+    ],
+    outcomes: [
+      "You continue working but face physical and emotional strain. Your education and well-being suffer.",
+      "You seek help, and your situation improves. You are able to attend school and work towards a better future."
+    ]
+  }
+];
+
+var currentScenario = 0;
+
+// Display current scenario and options
+function displayScenario() {
+  var scenarioElement = document.getElementById("scenario");
+  var optionsElement = document.getElementById("options");
+
+  scenarioElement.textContent = scenarios[currentScenario].scenario;
+  optionsElement.innerHTML = "";
+
+  scenarios[currentScenario].options.forEach((option, index) => {
+    var button = document.createElement("button");
+    button.textContent = option;
+    button.setAttribute("data-index", index);
+    button.onclick = handleOptionClick;
+    optionsElement.appendChild(button);
+  });
+}
+
+// Handle option click
+function handleOptionClick() {
+  var selectedIndex = parseInt(this.getAttribute("data-index"));
+  var outcomeElement = document.getElementById("outcome");
+  outcomeElement.textContent = scenarios[currentScenario].outcomes[selectedIndex];
+}
+
+// Move to the next scenario
+function nextScenario() {
+  currentScenario++;
+  if (currentScenario < scenarios.length) {
+    displayScenario();
+    var outcomeElement = document.getElementById("outcome");
+    outcomeElement.textContent = "";
+  } else {
+    alert("End of scenarios. Thank you for playing!");
+  }
+}
+
+// Start the simulation
+displayScenario();
+
+  </script>
+</body>
+</html>

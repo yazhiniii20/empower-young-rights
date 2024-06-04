@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Children's Rights Quiz</title>
+  <style>
+   body {
+  background-color: #f0f0f0;
+  font-family: Arial, sans-serif;
+}
+
+.quiz-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+#question {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+#choices {
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 40px 80px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#result {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #333;
+}
+
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>Children's Rights Quiz</h1>
+    <div id="question"></div>
+    <div id="choices"></div>
+    <button onclick="nextQuestion()">Next Question</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    // Define quiz questions and answers
+var questions = [
+  {
+    question: "What does UNCRC stand for?",
+    choices: ["United Nations Convention on Children's Rights", "Universal Declaration of Children's Rights", "United Nations Convention on the Rights of the Child"],
+    correctAnswer: 2
+  },
+  {
+    question: "How many articles are there in the UNCRC?",
+    choices: ["25", "50", "54"],
+    correctAnswer: 2
+  },
+  {
+    question: "What is the right to education?",
+    choices: ["Article 24", "Article 28", "Article 31"],
+    correctAnswer: 1
+  }
+];
+
+var currentQuestion = 0;
+var score = 0;
+
+// Display current question and choices
+function displayQuestion() {
+  var questionElement = document.getElementById("question");
+  var choicesElement = document.getElementById("choices");
+
+  questionElement.textContent = questions[currentQuestion].question;
+  choicesElement.innerHTML = "";
+
+  for (var i = 0; i < questions[currentQuestion].choices.length; i++) {
+    var choice = questions[currentQuestion].choices[i];
+    var button = document.createElement("button");
+    button.textContent = choice;
+    button.setAttribute("data-index", i);
+    button.onclick = handleAnswerClick;
+    choicesElement.appendChild(button);
+  }
+}
+
+// Check user's answer
+function handleAnswerClick() {
+  var selectedIndex = parseInt(this.getAttribute("data-index"));
+  if (selectedIndex === questions[currentQuestion].correctAnswer) {
+    score++;
+    document.getElementById("result").textContent = "Correct!";
+  } else {
+    document.getElementById("result").textContent = "Incorrect.";
+  }
+}
+
+// Move to the next question
+function nextQuestion() {
+  currentQuestion++;
+  if (currentQuestion < questions.length) {
+    displayQuestion();
+    document.getElementById("result").textContent = "";
+  } else {
+    showResults();
+  }
+}
+
+// Show final score
+function showResults() {
+  var quizContainer = document.querySelector(".quiz-container");
+  quizContainer.innerHTML = "<h1>Quiz Complete</h1><p>Your Score: " + score + " out of " + questions.length + "</p>";
+}
+
+// Start the quiz
+displayQuestion();
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Children's Rights Adventure Game</title>
+  <style>
+    body {
+  background-color: #f0f0f0;
+  font-family: Arial, sans-serif;
+}
+
+.game-container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+#story-container {
+  position: relative;
+}
+
+#story-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+#story-text {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+#options {
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 10px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#next-button {
+  display: none;
+}
+
+  </style>
+</head>
+<body>
+  <div class="game-container">
+    <h1>Children's Rights Adventure</h1><br><br>
+    <div id="story-container"><br><br>
+      <img id="story-image" src="images1/scene1.jpg" alt="Scene Image"><br><br>
+      <div id="story-text"></div>
+    </div>
+    <div id="options"></div>
+    <button id="next-button" onclick="nextStep()">Next Step</button>
+  </div>
+
+  <script>
+      var storyIndex = 0;
+
+// Define the adventure storyline
+var adventureStory = [
+  {
+    text: "Welcome to the Children's Rights Adventure! You are a young activist determined to promote children's rights in your community. Your first mission is to raise awareness about the importance of education for all children.",
+    image: "images1/scene1.jpg",
+    options: [
+      { text: "Start your mission", nextIndex: 1 }
+    ]
+  },
+  {
+    text: "You decide to organize a rally at your local school to advocate for better access to education. However, you encounter opposition from local authorities who refuse to grant you permission to hold the rally.",
+    image: "images1/scene2.jpg",
+    options: [
+      { text: "Continue organizing the rally despite the obstacles", nextIndex: 2 },
+      { text: "Seek alternative ways to raise awareness", nextIndex: 3 }
+    ]
+  },
+  {
+    text: "Despite facing challenges, you successfully organize the rally, and it gains widespread attention from the media and the community. Your advocacy efforts lead to positive changes, and more children in your community gain access to education.",
+    image: "images1/scene3.jpg",
+    options: [
+      { text: "Continue your activism for children's rights", nextIndex: 4 }
+    ]
+  },
+  {
+    text: "You explore alternative ways to raise awareness about children's rights, such as organizing workshops and distributing educational materials. Your efforts reach a wider audience and inspire others to join your cause.",
+    image: "images1/scene4.jpg",
+    options: [
+      { text: "Continue your activism for children's rights", nextIndex: 4 }
+    ]
+  },
+  {
+    text: "Congratulations! You have successfully completed your mission to promote children's rights. Your advocacy efforts have made a positive impact on the lives of children in your community.",
+    image: "images1/scene5.jpg",
+    options: []
+  }
+];
+
+// Display the current step in the adventure
+function displayStep(index) {
+  var storyElement = document.getElementById("story-text");
+  var imageElement = document.getElementById("story-image");
+  var optionsElement = document.getElementById("options");
+  var nextButton = document.getElementById("next-button");
+
+  storyElement.textContent = adventureStory[index].text;
+  imageElement.src = adventureStory[index].image;
+  optionsElement.innerHTML = "";
+
+  if (adventureStory[index].options.length > 0) {
+    adventureStory[index].options.forEach(option => {
+      var button = document.createElement("button");
+      button.textContent = option.text;
+      button.onclick = function() {
+        nextStep(option.nextIndex);
+      };
+      optionsElement.appendChild(button);
+    });
+    nextButton.style.display = "none";
+  } else {
+    nextButton.style.display = "block";
+  }
+}
+
+// Move to the next step in the adventure
+function nextStep(index) {
+  storyIndex = (index !== undefined) ? index : storyIndex + 1;
+  if (storyIndex < adventureStory.length) {
+    displayStep(storyIndex);
+  } else {
+    alert("Congratulations! You have completed the adventure.");
+  }
+}
+
+// Start the adventure
+displayStep(storyIndex);
+
+  </script>
+</body>
+</html>
